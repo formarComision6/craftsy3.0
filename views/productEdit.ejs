@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head')  %> 
+<body class="productAdd">
+    <%- include('./partials/header')  %> 
+    <div class="container">
+        <div class="formulario mt-5">
+            <h2>Editar Producto</h2>
+            <form action="/products/edit/<%= producto.id %>?_method=PUT" method="POST">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" name="title" value="<%= producto.title %>">
+                  </div>
+                  <div class="mb-3">
+                    <label for="floatingTextarea">Descripción</label>
+                    <textarea class="form-control" id="floatingTextarea" name="description"><%= producto.description %> </textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="formGroupExampleInput2" name="price" value=<%= producto.price %>>
+                  </div>
+                  <div class="mb-3">
+                    <label for="category" class="form-label">Categoría</label>
+
+                    <select id="category" class="form-select" name="category">
+                        <% categorias.forEach(categoria => { %>
+                         <option value="<%= categoria %>" <%= categoria == producto.category ? 'selected' : null %> ><%= categoria %></option>
+                        <% }) %>
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="productImagen" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" id="productImagen" name="image" accept="image/*">
+                    <span class="text-danger"><%= typeof error != 'undefined' ? error : null %> </span>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+
+    <%- include('./partials/scripts')  %> 
+</body>
+</html>

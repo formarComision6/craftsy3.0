@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head')  %> 
+<body class="productAdd">
+    <%- include('./partials/header')  %> 
+    <div class="container">
+        <div class="formulario w-75">
+            <div class="card mb-3  p-5">
+                <div class="row g-0">
+                  <div class="col-7">
+                    <div class="d-flex flex-wrap">
+                      <div class="d-flex flex-column flex-wrap w-25">
+                        <% producto.images.forEach((imagen,index) => { %>
+                          <img onclick="document.getElementById('img-principal').setAttribute('src','/images/<%=imagen%>')" src="/images/<%= imagen %>" class="w-100" alt="...">
+                        <% }) %>
+                      </div>
+                      <div class="box-img-principal w-75">
+                        <img id="img-principal" src="/images/<%= producto.images[0] %>" class="img-fluid" alt="...">
+                      </div>
+                    </div>
+                   
+                  </div>
+                
+                  <div class="col-5">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= producto.title %> </h5>
+                      <p class="card-text"><%= producto.category %> </p>
+                      <h4 class="card-text"><small>u$s</small> <%= producto.price.toFixed(2) %> </h4>
+                    </div>
+                    <div class="d-flex flex-justify-content-around flex-wrap">
+
+                      <% if (locals.userLogin && locals.userLogin.rol === "admin") { %>
+                        <a class="btn btn-success ms-2" href="/products/edit/<%= producto.id %>">editar</a>
+  
+                      <form action="/products/remove/<%= producto.id %>?_method=DELETE" method="POST">
+                          <button class="btn btn-danger ms-2">Eliminar</button>
+                      </form>
+                      <% } %>
+                     
+                      <a href="/" class="btn btn-primary ms-2">Volver</a>
+                    </div>
+                  </div>
+                 
+                 
+                </div>
+                <div class="relacionados mt-5">
+                  <h4>Productos relacionados</h4>
+                  <hr>
+                  <div class="glider-contain">
+                    <div class="glider">
+                      <% relacionados.forEach(producto => { %>
+                        <div class="d-flex flex-column align-items-center ">
+                          <img class="w-100" src="/images/<%= producto.images[0] %>" alt="">
+                          <p class="mt-4"><%= producto.title %> </p>
+                        </div>
+                      <% }) %>
+                     
+                    </div>
+                    <button aria-label="Previous" class="glider-prev">«</button>
+                    <button aria-label="Next" class="glider-next">»</button>
+                    <div role="tablist" class="dots"></div>
+                  </div>
+                </div>
+              </div>
+        </div>
+       
+    </div>
+    <%- include('./partials/scripts')  %>
+    <script src="/javascripts/productDetail.js"></script>
+</body>
+</html>

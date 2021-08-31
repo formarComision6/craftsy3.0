@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head')  %> 
+
+<body class="home">
+  <%- include('./partials/header')  %> 
+
+    <main class="container">
+        <section class="banner">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <% for( let index = 1; index < banner.length; index++ ) { %>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %> " aria-label="Slide 2"></button>
+                    <% } %>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" id="carousel1" style="background-image: url('/images/banner/<%=banner[0]%>');"></div>
+                    <% for( let index = 1; index < banner.length; index++ ) { %>
+                        <div class="carousel-item" id="carousel1" style="background-image: url('/images/banner/<%=banner[index]%>');"></div>
+                    <% } %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </section>
+        <div class="row">
+            <section class="productos col-12 col-md-8 col-lg-9 ">
+                <h3>Celulares</h3>
+
+                <div class="celulares row py-4 gx-3">
+                    <h4>Nuevos</h4>
+                  <% nuevos.forEach(producto => { %>
+                    <div class="col-12 col-md-6 col-lg-4 my-2">
+                        <article class="p-3">
+                             
+                                <img src="/images/<%= producto.images[0] %>"  class="img-fluid" alt="" />
+                                <h4><%= producto.title %> </h4>
+                                <p>
+                                    <%= producto.description %> 
+                                </p>
+                                <a class="btn btn-sm btn-primary" href="/products/detail/<%= producto.id %>">ver más</a>
+                               
+                           
+                        </article>
+                    </div>
+                  <% }) %>
+                  <h4>Refaccionados</h4>
+                  <% refact.forEach(producto => { %>
+                    <div class="col-12 col-md-6 col-lg-4 my-2">
+                        <article class="p-3">
+                            <img src="/images/<%= producto.images[0] %>"  class="img-fluid" alt="" />
+                                <h4><%= producto.title %> </h4>
+                                <p>
+                                    <%= producto.description %> 
+                                </p>
+                                <a class="btn btn-success" href="/products/edit/<%= producto.id %>">editar</a>
+                                <a href="/products/detail/<%= producto.id %>">ver más</a>
+                           
+                        </article>
+                    </div>
+                  <% }) %>
+                
+
+               
+            </div>
+            </section>
+            <aside class="col-12 col-md-4 col-lg-3">
+                <section class="tutoriales">
+                    <h3>Tutoriales</h3>
+                    <% tutoriales.forEach(tutorial => { %>
+                      <article>
+                        <div class="row">
+                            <div class="col-5">
+                                <img src="/images/<%= tutorial.image %> " alt="" />
+                            </div>
+                            <div class="col-7">
+                                <p><%= tutorial.name %> </p>
+                            </div>
+                        </div>
+                    </article>
+                    <% }) %>
+                   
+                </section>
+                <section class="publicidad">
+                    <h3>Publicidad</h3>
+                    <article>
+                        <img src="/images/ad-01.jpg" alt="" />
+                        <img src="/images/ad-02.jpg" alt="" />
+                    </article>
+                </section>
+            </aside>
+        </div>
+        <div>
+            <h4>Usados</h4>
+
+            <div class="glider-contain">
+              <div class="glider">
+                  <% usados.forEach(producto => { %>
+                      <article class="card p-3 mx-2">
+                          <img src="/images/<%= producto.images[0] %>"  class="img-fluid" alt="" />
+                              <h4><%= producto.title %> </h4>
+                              <p>
+                                  <%= producto.description %> 
+                              </p>
+                              <a class="btn btn-success" href="/products/edit/<%= producto.id %>">editar</a>
+                              <a href="/products/detail/<%= producto.id %>">ver más</a>
+                         
+                      </article>
+                <% }) %>
+              </div>
+              <button aria-label="Previous" class="glider-prev">«</button>
+              <button aria-label="Next" class="glider-next">»</button>
+              <div role="tablist" class="dots"></div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('./partials/scripts')  %> 
+    <script src="/javascripts/index.js"></script>
+</body>
+
+</html>

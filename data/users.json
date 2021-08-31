@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "nombre": "Eric",
+    "email": "menaericdaniel@gmail.com",
+    "contrasenia": "$2a$10$WJSBhPZGZMH9MMOBvxC10OR0sNDcVmKi1kpId.yOVR4LkxRIZaiVW",
+    "pais": "AR",
+    "genero": "m",
+    "hobbies": [
+      "guitarra",
+      "programacion"
+    ],
+    "rol": "admin"
+  },
+  {
+    "id": 2,
+    "nombre": "Lionel",
+    "email": "lionel@messi.com",
+    "contrasenia": "$2a$10$e4np3bojrE8ZtlQFm8vLuuGYYFCXIiWtJtx4GnekvW/fjJ8N6KW5.",
+    "pais": "AR",
+    "genero": "m",
+    "hobbies": [
+      "futbol"
+    ],
+    "rol": "user"
+  },
+  {
+    "id": 3,
+    "nombre": "Eugenia",
+    "email": "eugenia@gmail.com",
+    "contrasenia": "$2a$10$lAe8U7TIPdgX1YkT/htkku412hWpbG8Axnxm/PSd6ReKPRgRSLtKm",
+    "pais": "AR",
+    "genero": "f",
+    "hobbies": [],
+    "rol": "user"
+  }
+]

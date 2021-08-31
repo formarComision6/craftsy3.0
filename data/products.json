@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Iphone SE",
+    "description": "lorem ipsum dolor amet sit            ",
+    "price": 100,
+    "images": [
+      "img-phone-01.jpg"
+    ],
+    "category": "nuevo"
+  },
+  {
+    "id": 2,
+    "title": "Samsung A02",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-02.jpg"
+    ],
+    "category": "usado"
+  },
+  {
+    "id": 3,
+    "title": "Hyundai K4",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-03.png"
+    ],
+    "category": "refaccionado"
+  },
+  {
+    "id": 4,
+    "title": "Motorola G9",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-04.png"
+    ],
+    "category": "refaccionado"
+  },
+  {
+    "id": 5,
+    "title": "LG Luminus",
+    "description": "lorem ipsum dolor amet sit                             ",
+    "price": 300,
+    "images": [
+      "img-phone-05.jpg"
+    ],
+    "category": "nuevo"
+  },
+  {
+    "id": 6,
+    "title": "Nokia 1100",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-06.png"
+    ],
+    "category": "usado"
+  },
+  {
+    "id": 7,
+    "title": "Iphone SE",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-01.jpg"
+    ],
+    "category": "usado"
+  },
+  {
+    "id": 8,
+    "title": "Samsung A02",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-02.jpg"
+    ],
+    "category": "usado"
+  },
+  {
+    "id": 9,
+    "title": "Hyundai K4",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-03.png"
+    ],
+    "category": "usado"
+  },
+  {
+    "id": 10,
+    "title": "Motorola G9",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-04.png"
+    ],
+    "category": "refaccionado"
+  },
+  {
+    "id": 11,
+    "title": "LG Luminus",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-05.jpg"
+    ],
+    "category": "nuevo"
+  },
+  {
+    "id": 12,
+    "title": "Nokia 1100",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "img-phone-06.png"
+    ],
+    "category": "usado"
+  },
+  {
+    "id": 13,
+    "title": "Product example",
+    "description": "lorem ipsum dolor amet sit",
+    "price": 100,
+    "images": [
+      "images-1629222495975.jpg",
+      "images-1629222495977.png",
+      "images-1629222496011.png"
+    ],
+    "category": "usado"
+  }
+]

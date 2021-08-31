@@ -1,0 +1,73 @@
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.home .banner .carousel-item{
+    height: 355px;
+    width: 100%;
+    background-size: 100%;
+}
+
+.home section.productos article{
+    background-color: #ffff;
+    box-shadow: 2px 2px 5px grey;
+    border-radius: 10px;
+    height: 425px;
+    position: relative;
+}
+
+.home section.productos article img{
+    width: 100%;
+}
+
+.home section.productos article .contenedor{
+    background-color: blue;
+}
+
+
+.home section.productos article a{
+
+    text-transform: uppercase;
+  
+}
+
+.home section.productos h4{
+    margin: 10px 0;
+}
+
+
+.home aside h3, .home section.productos h3{
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #70a6bb;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.home aside section.tutoriales article {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #70a6bb;
+    border-bottom: none;
+}
+
+.home aside section.tutoriales article:last-child {
+    border-bottom: 1px solid #70a6bb;
+}
+
+.home aside section.tutoriales article p {
+   margin-left: 10px;
+}
+
+.home aside section.publicidad article{
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #70a6bb;
+    height: 540px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.home aside section.publicidad article img{
+    width: 100%;
+}

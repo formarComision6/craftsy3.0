@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('./partials/head') %>
+
+  <body>
+    <%- include('./partials/header') %>
+      <div class="register">
+        <main class="container">
+          <div class="row">
+            <div class="col-7 mx-auto mt-5">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">REGISTRATE</h5>
+                  <form class="row" method="POST" novalidate>
+                    <div class="col-12 col-md-6 mb-3">
+                      <label for="exampleInputName" class="form-label">Nombre</label>
+                      <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
+                        name="nombre"value="<%= locals.old && locals.old.nombre ? old.nombre : null%>">
+                        <span class="text-danger small"><%= locals.errores && locals.errores.nombre ? errores.nombre.msg : null %> </span>
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        name="email">
+                        <span class="text-danger small"><%= locals.errores && locals.errores.email ? errores.email.msg : null %> </span>
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1" name="contrasenia">
+                      <span class="text-danger small"><%= locals.errores && locals.errores.contrasenia ? errores.contrasenia.msg : null %> </span>
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                      <label for="exampleInputPassword2" class="form-label">Reingresá tu contraseña</label>
+                      <input type="password" class="form-control" id="exampleInputPassword2" name="contrasenia2">
+                    </div>
+                    <div class="col-12 mb-3">
+                      <label class="form-label">Pais de nacimiento<label>
+
+                          <select class="form-select" aria-label="Default select example" name="pais">
+                            <option selected hidden>Seleccione su país</option>
+                            <% paises.forEach(pais=> { %>
+                              <option value="<%= pais.codigo %>">
+                                <%= pais.nombre %>
+                              </option>
+                              <% }) %>
+                          </select>
+                    </div>
+
+                        <div class="col-6 mb-3">
+
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="genero" id="masculino" value="m">
+                            <label class="form-check-label" for="masculino">
+                              Masculino
+                            </label>
+                          </div>
+
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="genero" id="femenino" value="f">
+                            <label class="form-check-label" for="femenino">
+                              Femenino
+                            </label>
+                          </div>
+
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="genero" id="nodice" value="n" checked>
+                            <label class="form-check-label" for="nodice">
+                              Prefiero no decirlo
+                            </label>
+                          </div>
+                        </div>
+                            <div class="col-6 mb-3">
+
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="guitarra" id="guitarra" name="hobbies">
+                                <label class="form-check-label" for="guitarra">
+                                  Guitarra
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="futbol" id="futbol" name="hobbies">
+                                <label class="form-check-label" for="futbol">
+                                  Futbol
+                                </label>
+                              </div>
+                
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="tenis" id="tenis">
+                                <label class="form-check-label" for="tenis" name="hobbies">
+                                  Tenis
+                                </label>
+                              </div>
+            
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="programacion" id="programacion" name="hobbies">
+                                <label class="form-check-label" for="programacion">
+                                  Programación
+                                </label>
+                              </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                              <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="acepta">
+                                <label class="form-check-label" for="exampleCheck1">Acepto <a href="">términos</a>  y
+                                  condiciones</label>
+                              </div>
+                             
+                            </div>
+                            <span class="text-danger small my-2"><%= locals.errores && locals.errores.acepta ? errores.acepta.msg : null %> </span>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+      </div>
+
+
+      </main>
+      </div>
+      <%- include('./partials/scripts') %>
+
+  </body>
+
+</html>

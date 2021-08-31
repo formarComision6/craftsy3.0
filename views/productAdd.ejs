@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head')  %> 
+<body class="productAdd">
+    <%- include('./partials/header')  %> 
+    <div class="container">
+        <div class="formulario mt-5">
+          <h2>Agregar Producto</h2>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" name="title" value="<%= locals.old && old.title ? old.title : null %>">
+                    <span class="small text-danger"><%= locals.errores && errores.title ? errores.title.msg : null %> </span>
+                  </div>
+                  <div class="mb-3">
+                    <label for="floatingTextarea">Descripción</label>
+                    <textarea class="form-control" id="floatingTextarea" name="description"><%= locals.old && old.description ? old.description : null %></textarea>
+                    <span class="small text-danger"><%= locals.errores && errores.description ? errores.description.msg : null %> </span>
+                  </div>
+                  <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="formGroupExampleInput2" name="price" value="<%= locals.old && old.price ? old.price : null %>">
+                    <span class="small text-danger"><%= locals.errores && errores.price ? errores.price.msg : null %> </span>
+                  </div>
+                  <div class="mb-3">
+                    <label for="category" class="form-label">Categoría</label>
+
+                    <select id="category" class="form-select" name="category">
+                        <option value="" selected hidden>Seleccione la categoría</option>
+                        <% categorias.forEach(categoria => { %>
+                         <option value="<%= categoria %>" <%= locals.old && old.category === categoria ? 'selected' : null%> ><%= categoria %></option>
+                        <% }) %>
+                      </select>
+                      <span class="small text-danger"><%= locals.errores && errores.category ? errores.category.msg : null %> </span>
+                  </div>
+                  <div class="mb-3">
+                    <label for="productImagen" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" id="productImagen" name="images" accept="image/*" multiple>
+                    <span class="text-danger"><%= typeof error != 'undefined' ? error : null %> </span>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <%- include('./partials/scripts')  %> 
+</body>
+</html>

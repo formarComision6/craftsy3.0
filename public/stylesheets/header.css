@@ -1,0 +1,27 @@
+header{
+    background-color: #DF5837;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+header nav{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+    align-items: center;
+}
+
+header ul {
+    display: flex;
+}
+
+header ul li{
+    margin-right: 10px;
+}
+
+header ul li a {
+    color: white;
+    text-transform: uppercase;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include('./partials/head')  %> 
+
+<body>
+  <%- include('./partials/header')  %> 
+    <div class="register">
+        <main class="container mt-5">
+            <% if (result.length > 0) { %>
+                <h3>Resultados de la búsqueda: <%= busqueda %> </h3>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre del producto</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Precio</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% result.forEach(producto => { %>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td><%= producto.title %> </td>
+                                <td><%= producto.description %> </td>
+                                <td><%= producto.price %> </td>
+                              </tr>
+                        <% }) %>
+                      
+                     
+                    </tbody>
+                  </table>
+            <% } else{ %>
+                <h3>No hay resultado para la búsqueda: <%= busqueda %> </h3>
+
+                <% } %>
+
+        </main>
+    </div>
+    <%- include('./partials/scripts')  %> 
+
+</body>
+</html>

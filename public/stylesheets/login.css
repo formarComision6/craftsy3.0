@@ -1,0 +1,10 @@
+.login form button{
+    background-color: #3c8bbc;
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    padding: 10px;
+}
+.login form button:hover{
+    background-color: #7cb8d5;
+}
