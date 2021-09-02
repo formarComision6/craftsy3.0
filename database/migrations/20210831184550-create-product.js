@@ -12,13 +12,19 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       price: {
         type: Sequelize.INTEGER
       },
       categoryId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references : {
+          model : {
+            tableName : 'Categories'
+          },
+          key : 'id'
+        }
       },
       createdAt: {
         allowNull: false,
