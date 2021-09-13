@@ -9,7 +9,7 @@ module.exports = [
     }).withMessage('El nombre tiene que tener como mínimo 2 caracteres').bail()
     .isAlpha().withMessage('El nombre debe contener solo letras'),
 
-    check('email')
+    check('email') //chequear que el email no esté registrado!!!
     .isEmail().withMessage('Debes ingresar un email válido'),
 
     check('contrasenia')

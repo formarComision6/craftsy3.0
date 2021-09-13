@@ -18,17 +18,9 @@ module.exports = {
             if(req.files){
                 var imagenes = req.files.map(imagen => imagen.filename)
             }
-            let producto = {
-                id : productos[productos.length - 1].id + 1,
-                title,
-                description,
-                price : +price,
-                images : req.files.length != 0 ? imagenes : ['default-image.png'],
-                category
-            }
-           productos.push(producto);
-    
-           guardar(productos)
+
+            //base de datos
+         
            return res.redirect('/')
         }else{
             return res.render('productAdd',{
@@ -42,16 +34,19 @@ module.exports = {
 
     },
     detail : (req,res) => {
-        let producto = productos.find(producto => producto.id === +req.params.id);
+
+        //base de datos
 
         return res.render('productDetail',{
             producto,
             productos,
-            relacionados : productos.filter(item => item.category === producto.category)
+            relacionados,
         })
     },
     search : (req,res) => {
-        let result = productos.filter(producto => producto.title.toLowerCase().includes(req.query.search.toLowerCase()));
+
+        //base de datos
+
         return res.render('resultSearch',{
             result,
             productos,
@@ -59,8 +54,7 @@ module.exports = {
         })
     },
     edit : (req,res) => {
-        let producto = productos.find(producto => producto.id === +req.params.id);
-
+ // base de datos
         return res.render('productEdit',{
             categorias,
             productos,
@@ -70,23 +64,12 @@ module.exports = {
     update : (req,res) => {
         const {title, description,price,category} = req.body;
 
-        let producto = productos.find(producto => producto.id === +req.params.id)
-        let productoEditado = {
-            id : +req.params.id,
-            title,
-            description,
-            price : +price,
-            image : req.file ? req.file.filename : producto.image,
-            category
-        }
-
-        let productosModificados = productos.map(producto => producto.id === +req.params.id ? productoEditado : producto)
-
-        guardar(productosModificados)
+        //base de datos
         res.redirect('/')
           
     },
     remove : (req,res) => {
+        //base de datos
         res.send(req.params.id)
     }
 }
