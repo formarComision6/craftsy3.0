@@ -32,6 +32,6 @@ router.get('/detail/:id',detail);
 router.get('/search',search);
 router.get('/edit/:id', edit);
 router.put('/edit/:id',update);
-router.delete('/remove/:id',remove);
+router.delete('/delete/:id',remove);
 
 module.exports = router;

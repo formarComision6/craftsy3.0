@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head',{title:"Administrador"}) %> 
+<body>
+    <%- include('./partials/header') %> 
+<main>
+    <div class="d-flex flex-column">
+        <% banner.forEach(item => { %>
+         <img class="img-fluid my-2" src="/images/banner/<%= item %> " alt="">
+        <% }) %>
+    </div>
+</main>
+    <%- include('../partials/scripts') %> 
+
+</body>
+</html>

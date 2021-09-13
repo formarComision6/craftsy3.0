@@ -3,6 +3,7 @@ const path = require('path');
 const categorias = require('../data/categories_db');
 const {productos, guardar} = require('../data/products_db');
 const {validationResult} = require('express-validator');
+const db = require('../database/models');
 
 module.exports = {
     add : (req,res) => {
@@ -54,22 +55,42 @@ module.exports = {
         })
     },
     edit : (req,res) => {
- // base de datos
-        return res.render('productEdit',{
-            categorias,
-            productos,
-            producto
+        let categorias = db.Category.findAll();
+        let producto = db.Product.findByPk(req.params.id);
+        Promise.all([categorias,producto])
+        .then(([categorias,producto]) => {
+            return res.render('productEdit',{
+                categorias,
+                producto
+            })
         })
+      
     },
     update : (req,res) => {
-        const {title, description,price,category} = req.body;
+        const {name, description,price,categoryId} = req.body;
 
-        //base de datos
-        res.redirect('/')
+        db.Product.update(
+            {
+                name : name.trim(),
+                description : description.trim(),
+                price,
+                categoryId
+            },
+            {
+                where : {
+                    id : req.params.id
+                }
+            }
+        ).then( () =>   res.redirect('/admin'))
+        .catch(error => console.log(error))
           
     },
     remove : (req,res) => {
-        //base de datos
-        res.send(req.params.id)
+        db.Product.destroy({
+            where : {
+                id : req.params.id
+            }
+        }).then( () => res.redirect('/admin'))
+        .catch(error => console.log(error))
     }
 }

@@ -13,9 +13,7 @@
               smartphones
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <% productos.forEach(producto => { %>
-                    <li><a class="dropdown-item" href="#"><%= producto.title %> </a></li>
-                <% }) %>
+                    <li><a class="dropdown-item" href="#">Productos...</a></li>
              
             </ul>
           </li>
@@ -72,6 +70,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/users/register">registro</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin">administración</a>
               </li>
               <% } %>
         </ul>
