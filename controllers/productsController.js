@@ -7,42 +7,87 @@ const db = require('../database/models');
 
 module.exports = {
     add : (req,res) => {
-        return res.render('productAdd',{
-            categorias,
-           productos
-        })
+        db.Category.findAll()
+        .then(categorias => {
+            return res.render('productAdd',{
+                categorias,
+            })
+        }).catch(error => console.log(error))
+       
     },
     save : (req,res) => {
         let errors = validationResult(req);
+        
         if(errors.isEmpty()){
-            const {title, description,price,category} = req.body;
-            if(req.files){
-                var imagenes = req.files.map(imagen => imagen.filename)
-            }
+            const {name, description,price,categoryId} = req.body;
+          
+            db.Product.create({
+                ...req.body,
+                name : name.trim(),
+                description : description.trim()
+            }).then( product => {
 
-            //base de datos
-         
-           return res.redirect('/')
+                if(req.files){
+                    var images = [];
+                    var imagenes = req.files.map(imagen => imagen.filename);
+                    imagenes.forEach(img => {
+                        var image = {
+                            file : img,
+                            productId : product.id
+                        }
+                        images.push(image)
+                    });
+
+                    db.Image.bulkCreate(images,{validate : true})
+                        .then( () => console.log('imagenes agregadas'))
+                }
+
+                return res.redirect('/admin')
+            }).catch(error => console.log(error))
+          
         }else{
-            return res.render('productAdd',{
-                categorias,
-                productos,
-                errores : errors.mapped(),
-                old : req.body
-            })
+            db.Category.findAll()
+            .then(categorias => {
+                return res.render('productAdd',{
+                    categorias,
+                    errores : errors.mapped(),
+                    old : req.body
+                })
+            }).catch(error => console.log(error))
         }
-       
-
     },
     detail : (req,res) => {
 
-        //base de datos
+        db.Product.findOne({
+            where : {
+                id : req.params.id
+            },
+            include : [
+                {association : 'images'},
+                {association : 'category'}
+            ]
+        }).then(producto => {
+            console.log(producto);
+            db.Category.findOne({
+                where : {
+                    id : producto.categoryId
+                },
+                include : [
+                    {
+                        association : 'products',
+                        include : [
+                            {association : 'images'}
+                        ]
+                    }
+                ]
+            }).then(category =>{
+                return res.render('productDetail',{
+                    producto,
+                    relacionados : category.products
+                })
+            })
+        }).catch(error => console.log(error))
 
-        return res.render('productDetail',{
-            producto,
-            productos,
-            relacionados,
-        })
     },
     search : (req,res) => {
 
