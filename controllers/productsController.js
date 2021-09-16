@@ -1,12 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const categorias = require('../data/categories_db');
-const {productos, guardar} = require('../data/products_db');
 const {validationResult} = require('express-validator');
 const db = require('../database/models');
+const {Op} = require('sequelize');
 
-module.exports = {
-    add : (req,res) => {
+module.exports = {    add : (req,res) => {
         db.Category.findAll()
         .then(categorias => {
             return res.render('productAdd',{
@@ -91,13 +87,26 @@ module.exports = {
     },
     search : (req,res) => {
 
-        //base de datos
-
-        return res.render('resultSearch',{
+        db.Product.findAll({
+            where : {
+                [Op.or] : [
+                    {
+                        name :  {
+                            [Op.substring] : req.query.keywords
+                        }
+                    },
+                    {
+                        description : {
+                            [Op.substring] : req.query.keywords
+                        }
+                    }
+                ]
+            }
+        }).then(result => res.render('resultSearch',{
             result,
-            productos,
-            busqueda : req.query.search
-        })
+            busqueda : req.query.keywords
+        })).catch(error => console.log(error))
+
     },
     edit : (req,res) => {
         let categorias = db.Category.findAll();

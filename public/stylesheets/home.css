@@ -7,6 +7,7 @@
     height: 355px;
     width: 100%;
     background-size: 100%;
+    display: none;
 }
 
 .home section.productos article{
@@ -70,4 +71,11 @@
 }
 .home aside section.publicidad article img{
     width: 100%;
+}
+
+@media (min-width:1024px) {
+    .home .banner .carousel-item{
+        display: block;
+    }
+
 }
