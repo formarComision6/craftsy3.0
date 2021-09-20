@@ -40,6 +40,7 @@ app.use(localsUserCheck);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products',productsRouter);
+app.use('/api/products',require('./routes/api/products'));
 
 
 

@@ -2,7 +2,8 @@ const {validationResult} = require('express-validator');
 const db = require('../database/models');
 const {Op} = require('sequelize');
 
-module.exports = {    add : (req,res) => {
+module.exports = {    
+    add : (req,res) => {
         db.Category.findAll()
         .then(categorias => {
             return res.render('productAdd',{
