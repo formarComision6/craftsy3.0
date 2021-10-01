@@ -13,8 +13,10 @@
               smartphones
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Productos...</a></li>
-             
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -40,21 +42,25 @@
             </ul>
           </li>
         </ul>
+        <form action="/products/search" class="d-flex " method="GET">
+          <input name="keywords" class="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Search">
+          <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+        </form>
       
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
          
           <% if (locals.userLogin) { %>
-            <% if (locals.userLogin.rol === 2) { %>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin">administración</a>
-              </li>
-            <% } %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <%= locals.userLogin.name %>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/users/profile">Mi perfil</a></li>
+                <% if (locals.userLogin.rol === 2) { %>
+                  <li>
+                    <a class="dropdown-item" href="/admin">administración</a>
+                  </li>
+                <% } %>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="/users/logout">cerrar sesión</a></li>
               </ul>
@@ -74,9 +80,6 @@
   
   </nav>
   <div>
-    <form action="/products/search" class="d-flex" method="GET">
-      <input name="keywords" class="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Search">
-      <button class="btn btn-outline-light" type="submit">Buscar</button>
-    </form>
+    
   </div>
 </header>

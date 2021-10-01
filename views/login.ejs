@@ -7,10 +7,11 @@
     <div class="login">
         <main class="container">
             <div class="row">
-                <div class="col-6 mx-auto mt-5">
-                    <div class="card">
+                <div class="col-12 col-md-8 col-lg-4 mx-auto mt-5">
+                    <div class="card py-4">
                         <div class="card-body">
-                            <h5 class="card-title text-center">BIENVENIDO</h5>
+                            <h5 class="card-title text-center mb-4">BIENVENIDO</h5>
+                            <hr>
                             <form action="" method="POST">
                                 <div class="mb-3">
                                   <label for="exampleInputEmail1" class="form-label">Email</label>
@@ -26,8 +27,10 @@
                                         <label class="form-check-label" for="exampleCheck1">Recordarme</label>
                                       </div>
                                 </div>
-                                
-                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+
+                                </div>
                                 <span class="text-danger"><%= locals.errores && errores.email ? errores.email.msg : null%> </span>
                               </form>
                         </div>

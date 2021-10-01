@@ -15,9 +15,11 @@ module.exports = {
                     association : 'products',
                     include : [
                         {association : 'images'}
-                    ]
+                    ],
+                    limit : 9
                 }
-            ]
+            ],
+            
         });
         let refact = db.Category.findOne({
             where : {

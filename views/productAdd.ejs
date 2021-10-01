@@ -1,56 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head')  %> 
-<body class="productAdd">
-    <%- include('./partials/header')  %> 
-    <div class="container">
+<%- include('./partials/head') %>
+
+  <body class="productAdd">
+    <%- include('./partials/header') %>
+      <div class="container">
         <div class="formulario mt-5">
           <h2>Agregar Producto</h2>
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" name="name" value="<%= locals.old && old.name ? old.name : null %>">
-                    <span class="small text-danger"><%= locals.errores && errores.name ? errores.name.msg : null %> </span>
-                  </div>
-                  <div class="mb-3">
-                    <label for="floatingTextarea">Descripción</label>
-                    <textarea class="form-control" id="floatingTextarea" name="description"><%= locals.old && old.description ? old.description : null %></textarea>
-                    <span class="small text-danger"><%= locals.errores && errores.description ? errores.description.msg : null %> </span>
-                  </div>
-                  <div class="mb-3">
-                    <label for="formGroupExampleInput2" class="form-label">Precio</label>
-                    <input type="number" class="form-control" id="formGroupExampleInput2" name="price" value="<%= locals.old && old.price ? old.price : null %>">
-                    <span class="small text-danger"><%= locals.errores && errores.price ? errores.price.msg : null %> </span>
-                  </div>
-                  <div class="mb-3">
-                    <label for="category" class="form-label">Categoría</label>
+          <form class="needs-validation" action="" method="POST" enctype="multipart/form-data" novalidate>
 
-                    <select id="category" class="form-select" name="categoryId">
-                        <option value="" selected hidden>Seleccione la categoría</option>
-                        <% categorias.forEach(categoria => { %>
-                         <option value="<%= categoria.id %>" <%= locals.old && old.categoryId === categoria.id ? 'selected' : null%> ><%= categoria.name %></option>
-                        <% }) %>
-                      </select>
-                      <span class="small text-danger"><%= locals.errores && errores.categoryId ? errores.categoryId.msg : null %> </span>
-                  </div>
-                  <div class="mb-3">
-                    <label for="productImagen" class="form-label">Imágenes</label>
-                    <input type="file" class="form-control" id="productImagen" name="images" accept="image/*" multiple>
-                    <span class="text-danger"><%= typeof error != 'undefined' ? error : null %> </span>
-                  </div>
-                  <button class="btn btn-primary" type="submit">Guardar</button>
-            </form>
+            <div class="mb-3">
+              <label for="formGroupExampleInput" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="formGroupExampleInput" name="name"
+                value="<%= locals.old && old.name ? old.name : null %>" required>
+              <span class="small text-danger">
+                <%= locals.errores && errores.name ? errores.name.msg : null %>
+              </span>
+              <div class="invalid-feedback">
+                El nombre del producto es requerido
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="floatingTextarea">Descripción</label>
+              <textarea class="form-control" id="floatingTextarea" name="description"
+                required><%= locals.old && old.description ? old.description : null %></textarea>
+              <span class="small text-danger">
+                <%= locals.errores && errores.description ? errores.description.msg : null %>
+              </span>
+              <div class="invalid-feedback">
+                Debes escribir una breve descripción del producto
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="formGroupExampleInput2" class="form-label">Precio</label>
+              <input type="number" class="form-control" id="formGroupExampleInput2" name="price"
+                value="<%= locals.old && old.price ? old.price : null %>" required>
+              <span class="small text-danger">
+                <%= locals.errores && errores.price ? errores.price.msg : null %>
+              </span>
+              <div class="invalid-feedback">
+                  El precio es obligatorio
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="category" class="form-label">Categoría</label>
+              <select id="category" class="form-select" name="categoryId" required>
+                <option value="" selected hidden>Seleccione la categoría</option>
+                <% categorias.forEach(categoria=> { %>
+                  <option value="<%= categoria.id %>" <%=locals.old && old.categoryId===categoria.id ? 'selected' :
+                    null%> ><%= categoria.name %>
+                  </option>
+                  <% }) %>
+              </select>
+              <span class="small text-danger">
+                <%= locals.errores && errores.categoryId ? errores.categoryId.msg : null %>
+              </span>
+              <div class="invalid-feedback">
+                  Debes indicar la categoría
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="productImagen" class="form-label">Imágenes</label>
+              <input type="file" class="form-control" id="productImagen" name="images" accept="image/*" multiple required>
+              <span class="text-danger">
+                <%= typeof error !='undefined' ? error : null %>
+              </span>
+              <div class="invalid-feedback">
+                  Debes subir como mínimo una imagen  
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Guardar</button>
+          </form>
         </div>
-    </div>
+      </div>
 
+      <%- include('./partials/scripts') %>
 
+  </body>
 
-
-
-
-
-
-
-    <%- include('./partials/scripts')  %> 
-</body>
 </html>

@@ -32,94 +32,101 @@
               </div>
         </section>
         <div class="row">
-            <section class="productos col-12 col-md-8 col-lg-9 ">
-                <h3>Celulares</h3>
+            <section class="productos col-12 col-lg-9 ">
+                <h3 class="">Últimas novedades</h3>
 
-                <div class="celulares row py-4 gx-3">
-                    <h4>Nuevos</h4>
-                  <% nuevos.forEach(producto => { %>
-                    <div class="col-12 col-md-6 col-lg-4 my-2">
+                <div class="celulares row py-2 gx-3">
+                    <% nuevos.forEach(producto => { %>
+                    <div class="col-12 col-md-4 my-2">
+                        <a href="/products/detail/<%= producto.id %>">
                         <article class="p-3">
-                             
-                                <img src="/images/<%= producto.images[0].file %>"  class="img-fluid" alt="" />
-                                <h4><%= producto.title %> </h4>
-                                <p>
-                                    <%= producto.description %> 
-                                </p>
-                                <a class="btn btn-sm btn-primary" href="/products/detail/<%= producto.id %>">ver más</a>
-                               
-                           
+                            <img src="/images/<%= producto.images[0] ? producto.images[0].file  : null %>"  class="img-fluid" alt="" />
+                            <h4 class="text-secondary text-center"><%= producto.name %> </h4>
                         </article>
-                    </div>
-                  <% }) %>
-                  <h4>Refaccionados</h4>
-                  <% refact.forEach(producto => { %>
-                    <div class="col-12 col-md-6 col-lg-4 my-2">
-                        <article class="p-3">
-                            <img src="/images/<%= producto.images[0].file %>"  class="img-fluid" alt="" />
-                                <h4><%= producto.title %> </h4>
-                                <p>
-                                    <%= producto.description %> 
-                                </p>
-                                <a class="btn btn-success" href="/products/edit/<%= producto.id %>">editar</a>
-                                <a href="/products/detail/<%= producto.id %>">ver más</a>
-                           
-                        </article>
+                    </a>
                     </div>
                   <% }) %>
                 
-
-               
             </div>
             </section>
-            <aside class="col-12 col-md-4 col-lg-3">
+            <aside class="col-12 col-lg-3">
                 <section class="tutoriales">
                     <h3>Tutoriales</h3>
-                    <% tutoriales.forEach(tutorial => { %>
-                      <article>
-                        <div class="row">
-                            <div class="col-5">
-                                <img src="/images/<%= tutorial.image %> " alt="" />
+                    <div class="row">
+                        <% tutoriales.forEach(tutorial => { %>
+                            <div class="col-12 col-md-6 col-lg-12">
+                                <article>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <img src="/images/<%= tutorial.image %> " alt="" />
+                                        </div>
+                                        <div class="col-7">
+                                            <p><%= tutorial.name %> </p>
+                                        </div>
+                                    </div>
+                                </article>
                             </div>
-                            <div class="col-7">
-                                <p><%= tutorial.name %> </p>
-                            </div>
-                        </div>
-                    </article>
-                    <% }) %>
+                           
+                          <% }) %>
+                    </div>
+                   
                    
                 </section>
                 <section class="publicidad">
-                    <h3>Publicidad</h3>
-                    <article>
-                        <img src="/images/ad-01.jpg" alt="" />
-                        <img src="/images/ad-02.jpg" alt="" />
+                    <h3 class="">Publicidad</h3>
+                    <article class="row">
+                        <div class="col-12 col-md-6 col-lg-12 my-3">
+                        <img class="img-fluid" src="/images/ad-01.jpg" alt="" />
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-12 my-3">
+                        <img class="img-fluid" src="/images/ad-02.jpg" alt="" />
+                        </div>
                     </article>
                 </section>
             </aside>
+          
         </div>
         <div>
-            <h4>Usados</h4>
+            <section class="productos">
+                <h3 class="mb-4">Refaccionados con garantía</h3>
+                <div class=" glider-contain">
 
-            <div class="glider-contain">
-              <div class="glider">
-                  <% usados.forEach(producto => { %>
+                    <div class="glider">
+                        <% refact.forEach(producto => { %>
+                              <a href="/products/detail/<%= producto.id %>">
+                                  <article class="card p-3 mx-2">
+                                      <img src="/images/<%= producto.images[0] ? producto.images[0].file  : null %>"  class="img-fluid" alt="" />
+                                      <h4 class="text-secondary text-center"><%= producto.name %> </h4>
+                                  </article>
+                              </a>
+                      <% }) %>
+                    </div>
+                    <button aria-label="Previous" class="glider-prev">«</button>
+                    <button aria-label="Next" class="glider-next">»</button>
+                    <div role="tablist" class="dots"></div>
+                  </div>
+            </section>
+           
+<section class="productos">
+    <h3 class="mb-4">Usados seleccionados</h3>
+    <div class="glider-contain">
+        <div class="glider2">
+            <% usados.forEach(producto => { %>
+                  <a href="/products/detail/<%= producto.id %>">
                       <article class="card p-3 mx-2">
-                          <img src="/images/<%= producto.images[0].file %>"  class="img-fluid" alt="" />
-                              <h4><%= producto.title %> </h4>
-                              <p>
-                                  <%= producto.description %> 
-                              </p>
-                              <a class="btn btn-success" href="/products/edit/<%= producto.id %>">editar</a>
-                              <a href="/products/detail/<%= producto.id %>">ver más</a>
-                         
+                          <img src="/images/<%= producto.images[0] ? producto.images[0].file  : null %>"  class="img-fluid" alt="" />
+                          <h4 class="text-secondary text-center"><%= producto.name %> </h4>
                       </article>
-                <% }) %>
-              </div>
-              <button aria-label="Previous" class="glider-prev">«</button>
-              <button aria-label="Next" class="glider-next">»</button>
-              <div role="tablist" class="dots"></div>
-            </div>
+                  </a>
+          <% }) %>
+        </div>
+        <button aria-label="Previous" class="glider-prev">«</button>
+        <button aria-label="Next" class="glider-next">»</button>
+        <div role="tablist" class="dots"></div>
+      </div>
+</section>
+
+          
         </div>
     </main>
 

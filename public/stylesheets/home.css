@@ -3,19 +3,22 @@
     margin: 0 auto;
 }
 
+.home .banner{
+    display: none;
+}
+
 .home .banner .carousel-item{
-    height: 355px;
+    height: 40vh;
     width: 100%;
     background-size: 100%;
-    display: none;
 }
 
 .home section.productos article{
     background-color: #ffff;
     box-shadow: 2px 2px 5px grey;
     border-radius: 10px;
-    height: 425px;
     position: relative;
+    height: 70vh;
 }
 
 .home section.productos article img{
@@ -65,17 +68,31 @@
     background-color: white;
     padding: 10px;
     border: 1px solid #70a6bb;
-    height: 540px;
-    flex-direction: column;
-    justify-content: space-between;
+    margin: 20px 5px;
+   
 }
 .home aside section.publicidad article img{
     width: 100%;
 }
 
-@media (min-width:1024px) {
-    .home .banner .carousel-item{
+@media (min-width:768px) {
+    .home .banner{
         display: block;
     }
+    .home section.productos article{
+     
+        height: 60vh;
+    }
+    
+}
+@media (min-width:1024px) {
+    .home .banner .carousel-item{
+        height: 53vh;
+     
+    }
 
+    .home section.productos article{
+     
+        height: 50vh;
+    }
 }

@@ -4,44 +4,71 @@
 <body>
     <%- include('./partials/header') %> 
 
-    <main>
-        <div class="card ">
+    <main class="container">
+        <div class="card my-3">
             <div class="table-responsive">
-
-        <table class="table table-hover  ">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Producto</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Categoría</th>
-                <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-                <% productos.forEach((producto,index) => { %>
-                    <tr>
-                        <th scope="row"><%= index + 1 %> </th>
-                        <td><%= producto.name %> </td>
-                        <td><%= producto.price %> </td>
-                        <td><%= producto.category.name %> </td>
-                        <td class="d-flex justify-content-around">
-                            <a class="btn btn-sm btn-success"
-                            href="/products/edit/<%= producto.id %> "><i class="fas fa-edit"></i></a>
-                        <div>
-                            <form
-                                action="/products/delete/<%= producto.id %>?_method=DELETE"
-                                method="POST">
-                                <button class="btn btn-sm btn-danger"
-                                    type='submit'><i class="fas fa-trash-alt"></i></button>
-                            </form>
-                        </div>
-                        </td>
-                      </tr>
-                <% }) %>
-             
-            </tbody>
-          </table>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <form action="">
+                        <select class="form-select" name="" id="">
+                            <option value="" selected hidden>Filtrar</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="col-12 col-md-4">
+                    <form action="">
+                        <select class="form-select" name="" id="">
+                            <option value="" selected hidden>Ordenar</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="col-12 col-md-4">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-dark" type="submit">Buscar</button>
+                      </form>
+                </div>
+            </div>
+           
+        </div>
+        <div class="card-body">
+            <table class="table table-hover  ">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% productos.forEach((producto,index) => { %>
+                        <tr>
+                            <th scope="row"><%= index + 1 %> </th>
+                            <td><%= producto.name %> </td>
+                            <td><%= producto.price %> </td>
+                            <td><%= producto.category.name %> </td>
+                            <td class="d-flex justify-content-around">
+                                <a class="btn btn-sm btn-success"
+                                href="/products/edit/<%= producto.id %> "><i class="fas fa-edit"></i></a>
+                            <div>
+                                <form
+                                    action="/products/delete/<%= producto.id %>?_method=DELETE"
+                                    method="POST">
+                                    <button class="btn btn-sm btn-danger"
+                                        type='submit'><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                            </td>
+                          </tr>
+                    <% }) %>
+                 
+                </tbody>
+              </table>
+        </div>
+        
         </div>
     </div>
 
