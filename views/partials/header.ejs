@@ -42,11 +42,10 @@
             </ul>
           </li>
         </ul>
-        <form action="/products/search" class="d-flex " method="GET">
-          <input name="keywords" class="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Search">
-          <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+        <form id="form-search" action="/products/search" class="d-flex" method="GET">
+          <input id="input-search" name="keywords" class="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Search">
+          <button id="btn-search" class="btn btn-outline-light"><i class="fas fa-search"></i></button>
         </form>
-      
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
          
           <% if (locals.userLogin) { %>

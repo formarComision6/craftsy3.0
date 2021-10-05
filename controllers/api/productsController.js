@@ -1,6 +1,7 @@
 const db = require('../../database/models');
 const getURL = req => `${req.protocol}://${req.get('host')}${req.originalUrl}`;
 const getURLBase = req => `${req.protocol}://${req.get('host')}`;
+const {Op} = require('sequelize')
 
 const throwError = (res,error) => {
     return res.status(error.status || 500).json({
@@ -15,7 +16,8 @@ module.exports = {
         try {
             const products = await db.Product.findAll({
                 include : [
-                    {association : 'categora'}
+                    {association : 'category'},
+                    {association : 'images'}
                 ]
             })
             let response = {
@@ -86,6 +88,40 @@ module.exports = {
                 status : 400,
                 messages : error.errors.map(error => error.message)
             })
+        }
+    },
+    search : async (req,res) => {
+        console.log(req.query.keywords)
+        try {
+            let products = await db.Product.findAll({
+                where : {
+                    [Op.or] : [
+                        {
+                            name :  {
+                                [Op.substring] : req.query.keywords
+                            }
+                        },
+                        {
+                            description : {
+                                [Op.substring] : req.query.keywords
+                            }
+                        }
+                    ]
+                },
+                include : ['images']
+            })
+            let response = {
+                status : 200,
+                meta : {
+                    total : products.length,
+                    url : getURL(req)
+                },
+                data : products
+            }
+            return res.status(200).json(response)
+        } catch (error) {
+            throwError(res,error)
+
         }
     }
 }

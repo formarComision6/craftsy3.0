@@ -3,7 +3,7 @@
 const faker = require('faker');
 const products = [];
 
-for (let i = 0; i < 36; i++) {
+for (let i = 0; i < 360; i++) {
   
   var product = {
     name : faker.commerce.productName(),

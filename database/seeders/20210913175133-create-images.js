@@ -4,7 +4,7 @@ const imagenes = ['img-phone-01.jpg','img-phone-02.jpg','img-phone-03.png','img-
 
 const images = [];
 
-for (let i = 0; i < 36; i++) {
+for (let i = 0; i < 360; i++) {
   var image = {
     file : imagenes[Math.floor(Math.random() * (5 - 0)) + 0],
     productId : i + 1,
