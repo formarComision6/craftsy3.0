@@ -53,8 +53,53 @@ module.exports = {
                     rol : user.rolId,
                     avatar : user.avatar
                 }
+
                 recordar && res.cookie('craftsyForEver',req.session.userLogin,{maxAge: 1000 * 60})
-                return res.redirect('/')
+
+                req.session.cart = []
+
+                db.Order.findOne({
+                        where : {
+                            userId : req.session.userLogin.id,
+                            status : 'pending'
+                        },
+                        include : [
+                            {association : 'carts',
+                                include : [
+                                    {association : 'product',
+                                        include : ['category','images']
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                    .then(order => {
+                        if(order){
+                            order.carts.forEach(item => {
+                                let product = {
+                                    id : item.productId,
+                                    nombre: item.product.name,
+                                    imagen : item.product.images[0].file,
+                                    categoria : item.product.category.name,
+                                    cantidad : item.quantity,
+                                    precio : item.product.price,
+                                    total : item.product.price * item.quantity,
+                                    orderId : order.id
+                                }
+                                req.session.cart.push(product)
+                            });
+                            return res.redirect('/')
+                        }else{
+                            db.Order.create({
+                                userId : req.session.userLogin.id,
+                                status : 'pending',
+                            }).then( () => {
+                                return res.redirect('/')
+
+                            })
+                        }
+                    }).catch(error => console.log(error))
+                   
             })
            
         }else{

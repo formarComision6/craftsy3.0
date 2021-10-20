@@ -12,18 +12,19 @@ const throwError = (res,error) => {
 
 module.exports = {
     list : async (req,res) => {
-
+        let offset = +req.query.limit * (+req.query.current - 1)
         try {
+            const total = await db.Product.findAll()
             const products = await db.Product.findAll({
+                limit : +req.query.limit || 10,
+                offset : offset || 0,
                 include : [
-                    {association : 'category'},
-                    {association : 'images'}
-                ]
+                    {association : 'category'}                ]
             })
             let response = {
                 status : 200,
                 meta : {
-                    cantidad : products.length,
+                    total : total.length,
                     url : getURL(req)
                 },
                 data : products

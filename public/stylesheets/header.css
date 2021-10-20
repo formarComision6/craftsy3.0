@@ -25,3 +25,19 @@ header ul li a {
     color: white;
     text-transform: uppercase;
 }
+
+header .btn-cart{
+    border: 0;
+    background: none;
+    margin-right: 15px;
+    position: relative;
+  }
+header .btn-cart i{
+    font-size: 40px;
+  }
+header .btn-cart span{
+    font-size: 16px;
+    position: absolute;
+    top:2px;
+    right: -4px;
+  }

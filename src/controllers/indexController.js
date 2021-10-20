@@ -61,13 +61,6 @@ module.exports = {
         }).catch(error => console.log(error))
       
     },
-    admin : (req,res) => {
-        db.Product.findAll({
-            include : [
-                {association : 'category'}
-            ]
-        }).then(productos => res.render('admin/index',{
-            productos
-        }))
-    }
+    admin : (req,res) => res.render('admin/index')
+
 }

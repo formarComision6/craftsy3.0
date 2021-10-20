@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -25,7 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname,'..', 'public')));
 
 app.use(methodOverride('_method'));
 app.use(session({
@@ -40,8 +42,10 @@ app.use(localsUserCheck);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products',productsRouter);
+
 app.use('/api/products',require('./routes/api/products'));
 app.use('/api/users',require('./routes/api/users'));
+app.use('/api/carts',require('./routes/api/carts'));
 
 
 

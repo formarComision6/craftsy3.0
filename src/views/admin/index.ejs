@@ -33,6 +33,11 @@
            
         </div>
         <div class="card-body">
+            <nav class="d-flex justify-content-end">
+                <ul class="pagination pagination-sm" id="box-paginator">
+                
+                </ul>
+              </nav>
             <table class="table table-hover  ">
                 <thead>
                   <tr>
@@ -43,28 +48,8 @@
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
-                <tbody>
-                    <% productos.forEach((producto,index) => { %>
-                        <tr>
-                            <th scope="row"><%= index + 1 %> </th>
-                            <td><%= producto.name %> </td>
-                            <td><%= producto.price %> </td>
-                            <td><%= producto.category.name %> </td>
-                            <td class="d-flex justify-content-around">
-                                <a class="btn btn-sm btn-success"
-                                href="/products/edit/<%= producto.id %> "><i class="fas fa-edit"></i></a>
-                            <div>
-                                <form
-                                    action="/products/delete/<%= producto.id %>?_method=DELETE"
-                                    method="POST">
-                                    <button class="btn btn-sm btn-danger"
-                                        type='submit'><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </div>
-                            </td>
-                          </tr>
-                    <% }) %>
-                 
+                <tbody id="table-products">
+                             
                 </tbody>
               </table>
         </div>
@@ -74,6 +59,6 @@
 
     </main>
     <%- include('../partials/scripts') %> 
-
+    <script src="/javascripts/admin.js"></script>
 </body>
 </html>
