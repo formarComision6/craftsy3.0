@@ -88,16 +88,8 @@ module.exports = {
                                 }
                                 req.session.cart.push(product)
                             });
-                            return res.redirect('/')
-                        }else{
-                            db.Order.create({
-                                userId : req.session.userLogin.id,
-                                status : 'pending',
-                            }).then( () => {
-                                return res.redirect('/')
-
-                            })
                         }
+                        return res.redirect('/')
                     }).catch(error => console.log(error))
                    
             })
