@@ -20,6 +20,25 @@ const loadProduct = async (limit,show,current,initial,next) => {
 
 loadProduct(10,6,1,1,0)
 
+const confirmRemove = (e,form) => {
+    e.preventDefault()
+    //console.log(form)
+
+    Swal.fire({
+        title: '¿Estás seguro que deseas eliminar el producto?',
+        text: "¡Luego no podrás revertir los cambios!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminalo',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit()
+        }
+    })
+}
 
 const addItem = product => {
     let item = `
@@ -34,9 +53,12 @@ const addItem = product => {
         <div>
             <form
                 action="/products/delete/${product.id}?_method=DELETE"
-                method="POST">
-                <button class="btn btn-sm btn-danger"
-                    type='submit'><i class="fas fa-trash-alt"></i></button>
+                method="POST" id="formDelete${product.id}">
+                <button 
+                    class="btn btn-sm btn-danger"
+                    type='submit'
+                    onclick="confirmRemove(event,document.querySelector('#formDelete${product.id}'))"
+                ><i class="fas fa-trash-alt"></i></button>
             </form>
         </div>
         </td>
