@@ -1,7 +1,8 @@
 const db = require('../../database/models');
 const getURL = req => `${req.protocol}://${req.get('host')}${req.originalUrl}`;
 const getURLBase = req => `${req.protocol}://${req.get('host')}`;
-const {Op} = require('sequelize')
+const {Op} = require('sequelize');
+const fs = require('fs');
 
 const throwError = (res,error) => {
     return res.status(error.status || 500).json({
@@ -124,5 +125,72 @@ module.exports = {
             throwError(res,error)
 
         }
-    }
+    },
+    deleteImage : async (req,res) => {
+        try {
+            let image = await db.Image.findByPk(req.params.id);
+            console.log(image)
+
+            fs.existsSync(path.join(__dirname, '../../public/images/' +image.file)) ? fs.unlinkSync(path.join(__dirname, '../../public/images/' +image.file)) : null
+
+            db.Image.destroy(
+                {
+                    where : {
+                        id : req.params.id
+                    }
+                }
+            ).then(async result => {
+                console.log(result);
+                let images = await db.Image.findAll({
+                    where : {
+                        productId : image.productId
+                    }
+                })
+                console.log(images)
+    
+                let response = {
+                    status : 200,
+                    message : 'Imagen eliminada',
+                    images
+                }
+                return res.status(201).json(response)
+            })
+          
+        
+        } catch (error) {
+            return res.status(400).json({
+                status : 400,
+                message : error
+            })
+        }
+    },
+    addImage : async (req,res) => {
+        console.log(req.files)
+        try {
+            let files = req.files.map(image => {
+                let img = {
+                    file : image.filename,
+                    productId : req.params.id
+                }
+                return img
+            })
+            await db.Image.bulkCreate(files,{validate :  true})
+            let images = await db.Image.findAll({
+                where : {
+                    productId : req.params.id
+                }
+            })
+            let response = {
+                status : 200,
+                message : 'Imagenes agregadas',
+                images
+            }
+            return res.status(201).json(response)
+        } catch (error) {
+            return res.status(400).json({
+                status : 400,
+                message : error
+            })
+        }
+    },
 }

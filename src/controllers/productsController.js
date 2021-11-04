@@ -89,7 +89,9 @@ module.exports = {
     search: (req, res) => res.render('resultSearch'),
     edit: (req, res) => {
         let categorias = db.Category.findAll();
-        let producto = db.Product.findByPk(req.params.id);
+        let producto = db.Product.findByPk(req.params.id,{
+            include : ['category','images']
+        });
         Promise.all([categorias, producto])
             .then(([categorias, producto]) => {
                 return res.render('productEdit', {

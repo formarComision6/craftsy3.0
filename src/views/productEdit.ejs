@@ -4,41 +4,105 @@
 <body class="productAdd">
     <%- include('./partials/header')  %> 
     <div class="container">
-        <div class="formulario mt-5">
-            <h2>Editar Producto</h2>
-            <form action="/products/edit/<%= producto.id %>?_method=PUT" method="POST">
+      <div class="row">
+        <div class="formulario col-12 col-md-6">
+          <h2>Editar Producto</h2>
+          <form action="/products/edit/<%= producto.id %>?_method=PUT" method="POST" class="row">
+              <div class="mb-3">
+                  <label for="formGroupExampleInput" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="formGroupExampleInput" name="name" value="<%= producto.name %>">
+                </div>
                 <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" name="name" value="<%= producto.name %>">
-                  </div>
-                  <div class="mb-3">
-                    <label for="floatingTextarea">Descripción</label>
-                    <textarea class="form-control" id="floatingTextarea" name="description"><%= producto.description %> </textarea>
-                  </div>
-                  <div class="mb-3">
-                    <label for="formGroupExampleInput2" class="form-label">Precio</label>
-                    <input type="number" class="form-control" id="formGroupExampleInput2" name="price" value=<%= producto.price %>>
-                  </div>
-                  <div class="mb-3">
-                    <label for="category" class="form-label">Categoría</label>
+                  <label for="floatingTextarea">Descripción</label>
+                  <textarea style="resize: none;" class="form-control" id="floatingTextarea" name="description"><%= producto.description %> </textarea>
+                </div>
+                <div class="col-6 mb-3">
+                  <label for="formGroupExampleInput2" class="form-label">Precio</label>
+                  <input type="number" class="form-control" id="formGroupExampleInput2" name="price" value=<%= producto.price %>>
+                </div>
+                <div class="col-6 mb-3">
+                  <label for="category" class="form-label">Categoría</label>
 
-                    <select id="category" class="form-select" name="categoryId">
-                        <% categorias.forEach(categoria => { %>
-                         <option value="<%= categoria.id %>" <%= categoria.id == producto.categoryId ? 'selected' : null %> ><%= categoria.name %></option>
-                        <% }) %>
-                      </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="productImagen" class="form-label">Imagen</label>
-                    <input type="file" class="form-control" id="productImagen" name="image" accept="image/*">
-                    <span class="text-danger"><%= typeof error != 'undefined' ? error : null %> </span>
-                  </div>
+                  <select id="category" class="form-select" name="categoryId">
+                      <% categorias.forEach(categoria => { %>
+                       <option value="<%= categoria.id %>" <%= categoria.id == producto.categoryId ? 'selected' : null %> ><%= categoria.name %></option>
+                      <% }) %>
+                    </select>
+                </div>
+                <div class="mb-3 d-flex justify-content-around">
+                  <label for="productImagen" class="btn btn-secondary">Agregar imágenes</label>
+                  <input hidden type="file" class="form-control" id="productImagen" name="image" accept="image/*" onchange="addImage('<%=producto.id%>',this.files)" multiple>
                   <button class="btn btn-primary" type="submit">Guardar</button>
-            </form>
+
+                </div>
+                
+          </form>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="row mt-5 g-2" id="preview">
+          <% producto.images.forEach((image,index) => { %>
+            <div class="col-6 text-center" >
+              <img width="200" src="/images/<%= image.file %>" alt="">
+                <div >
+                  <a onclick="deleteImage('<%=image.id%>')" class="btn btn-danger ">Eliminar</a>
+                </div>
+            </div>
+          <% }) %>
         </div>
+      
+      </div>
+      </div>
+        
     </div>
 
+    <script>
+      const showPreview = array => {
+        const preview = document.getElementById('preview');
+        preview.innerHTML = null;
+        array.forEach(image => {
+            preview.innerHTML += `
+            <div class="col-6">
+              <img class="img-fluid" src="/images/${image.file}" alt="">
+                <div class="text-center">
+                  <button onclick="deleteImage('${image.id}')" class="btn btn-sm btn-danger">Eliminar</button>
+                </div>
+            </div>
+            `
+          });
+      }
+      const deleteImage = async id => {
+        try {
+          let response = await fetch('/api/products/delete-image/' + id)
+          let result = await response.json()
+          console.log(result)
+          showPreview(result.images)
+        } catch (error) {
+          console.log(error)
+        }
+      }
 
+      const addImage = async (id,files) => {
+        var data = new FormData()
+          for (const file of files) {
+            data.append('images',file,file.name)
+          } 
+          console.log(data)
+        try {
+         
+          let response = await fetch('/api/products/add-images/' + id,{
+            method : 'POST',
+            body : data,
+          })
+          let result = await response.json()
+          console.log(result.message)
+          showPreview(result.images)
+         
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      
+    </script>
     <%- include('./partials/scripts')  %> 
 </body>
 </html>
