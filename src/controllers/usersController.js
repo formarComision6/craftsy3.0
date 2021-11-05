@@ -112,13 +112,25 @@ module.exports = {
             {
                 name : name.trim(),
                 avatar : req.file && req.file.filename,
-                password :  password != " " && bcrypt.hashSync(password,10)
             },
             {
                 where : {
                     id : req.params.id
                 }
-            }).then( () => res.redirect('/users/profile'))
+            }).then( () => {
+                if(password){
+                    db.User.update(
+                        {password : bcrypt.hashSync(password.trim(),10)},
+                        {where : {id:req.params.id}}
+                    )
+                    .then( () => {
+                        req.session.destroy();
+                        res.cookie('craftsyForEver',null,{maxAge:-1})
+                        return res.redirect('/users/login')
+                    })
+                }
+                return res.redirect('/users/profile')
+            })
     },
     logout : (req,res) => {
         req.session.destroy();
